@@ -11,4 +11,5 @@
 
 > 🧠 Based on **PsychoPy 2021.2.3**.  
 > ⚠️ May be compatible with other versions, but not guaranteed.
-> For Mac, try openning gpt_builder.py in the python of your PsychoPy.
+> For Mac, try opening gpt_builder.py in the Python of your PsychoPy (PsychoPy coder).
+
