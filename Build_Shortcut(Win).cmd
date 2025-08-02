@@ -1,0 +1,1 @@
+powershell -Command "$s = (New-Object -ComObject WScript.Shell).CreateShortcut('PsychoPy Gpt Builder.lnk'); $p = '%cd%'; $s.TargetPath = \"$p\\pythonw.exe\"; $s.Arguments = 'gpt_builder.py'; $s.WorkingDirectory = $p; $s.IconLocation = \"$p\\Lib\\site-packages\\psychopy\\app\\Resources\\builder.ico\"; $s.Save()"
