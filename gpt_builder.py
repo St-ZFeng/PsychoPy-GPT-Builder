@@ -98,8 +98,11 @@ def get_components_params(names):
                     if comp_instance.params[param].allowedUpdates:
                         if len(comp_instance.params[param].allowedUpdates) > 0:
                             allowed_up= f"Allowed updates: {comp_instance.params[param].allowedUpdates}. "
-                    
-                    texts+=f"{param}({comp_instance.params[param].valType}{defult_value}): {comp_instance.params[param].hint}. {allowed}{allowed_up}\n"
+                    if comp_instance.params[param].valType in ['num','list'] and comp_instance.params[param].inputType =='single':
+                        defult_start='Defult start with $.'
+                    else:
+                        defult_start=''
+                    texts+=f"{param}({comp_instance.params[param].valType}{defult_value}): {comp_instance.params[param].hint}. {allowed}{allowed_up}{defult_start}\n"
             texts+="\n"
         return texts
     except Exception as e:
@@ -495,7 +498,7 @@ After build the flow successly, do not explain too much, only indicate that the 
 Tips:
 - When constructing the flow, ensure each routine name is unique to avoid duplication. Unless you want to reuse an existing routine, in which case just provide the Routine with same name but no parameters.
 - For all component and LoopStart names, ensure they are not duplicated; components must not be reused.
-- For some string-type parameter settings, PsychoPy allows code settings by prefixing the code text with a $ symbol, e.g., $target (from a variable in the loop's condition file, which can be used directly with $). You can use these code settings to dynamically modify parameter values, but don't forget to set the update method (updates) to "set every repeat" or "set every frame" to ensure it takes effect each repeat or frame. Note: code-type parameters do not need the $ symbol, as they are written as code.
+- For some string-type parameter settings, PsychoPy allows code settings by prefixing the code text with a $ symbol, e.g., $target (from a variable in the loop's condition file, which can be used directly with $). You can use these code settings to dynamically modify parameter values, but don't forget to set the update method (updates) to "set every repeat" or "set every frame" to ensure it takes effect each repeat or frame. Note: Some parameters, when using code variables, do not need to start with $ because they are already marked to start with $ by default.
 - The update parameter for components defaults to "constant". If you need to modify a parameter every repeat or frame, explicitly set its update method.
 - If design details are unclear, ask the user for more information to ensure your design meets their needs.
 - Users may provide file resources (such as instruction images, condition tables, stimuli materials) for use in the experiment flow. If necessary files are missing, first consider how to achieving the requirements without these files. Unless you believe there is no way to bypass these files, you can ask the user for them, or assume certain files and use them, but explain this before construction and get user approval.
